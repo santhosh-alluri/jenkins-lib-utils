@@ -2,7 +2,7 @@ import java.text.Normalizer
 import java.text.Normalizer.Form
 import java.util.regex.Pattern
 
-void call(bitbucketCfg, String comment) {
+void call(Map bitbucketCfg, String comment) {
   projectKey         = bitbucketCfg.projectKey
   pullRequestId      = env.CHANGE_ID
   repoName           = determineRepoName()
@@ -50,4 +50,5 @@ String getBasicAuthCredentials(String httpsCredentialsId) {
   ]) {
     return "$BB_USR:$BB_PASS".bytes.encodeBase64().toString()
   }
+  return ''
 }

@@ -2,7 +2,7 @@ import java.text.Normalizer
 import java.text.Normalizer.Form
 import java.util.regex.Pattern
 
-void call(bitbucketCfg, String status) {
+void call(Map bitbucketCfg, String status) {
   projectKey         = bitbucketCfg.projectKey
   pullRequestId      = env.CHANGE_ID
   repoName           = determineRepoName()

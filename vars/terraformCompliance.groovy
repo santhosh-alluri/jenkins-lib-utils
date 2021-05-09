@@ -1,4 +1,5 @@
-def call(pathToPlanFile, pathToFeatures, pathToTerraform, sshFileCredentialsId, execCfg, complianceDockerImage='tonyvankenobi/terraform-compliance:test') {
+/* groovylint-disable-next-line LineLength */
+void call(String pathToPlanFile, String pathToFeatures, String pathToTerraform, String sshFileCredentialsId, Map execCfg, String complianceDockerImage='tonyvankenobi/terraform-compliance:test') {
 
   withAWS(credentials: execCfg.awsCredentialsId, region: execCfg.awsRegion) {
     sh "terraform show -json ${pathToPlanFile} > plan.json"

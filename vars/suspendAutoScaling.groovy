@@ -1,3 +1,4 @@
+/* groovylint-disable LineLength */
 void call(String suspend, String serviceNamespace, String scalableDimension, String resourceId, String awsCredentialsId, String awsRegion) {
   withAWS(credentials: awsCredentialsId, region: awsRegion) {
     sh(script: """

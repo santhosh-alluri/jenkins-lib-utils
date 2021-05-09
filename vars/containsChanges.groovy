@@ -1,4 +1,4 @@
-boolean call(breakingChanges) {
+boolean call(List breakingChanges) {
   changedFiles = sh(script: 'git diff-tree --no-commit-id --name-only -r HEAD', returnStdout: true).trim()
 
   containsBreakingChange = false
