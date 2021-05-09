@@ -1,3 +1,9 @@
+/* Copyright (c) 2021, Irmantas Marozas
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. */
+
 boolean call(List breakingChanges) {
   changedFiles = sh(script: 'git diff-tree --no-commit-id --name-only -r HEAD', returnStdout: true).trim()
 
