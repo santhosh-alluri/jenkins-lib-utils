@@ -8,15 +8,14 @@ import java.text.Normalizer
 import java.text.Normalizer.Form
 import java.util.regex.Pattern
 
-void call(Map bitbucketCfg, String comment) {
-  projectKey         = bitbucketCfg.projectKey
+void call(String httpsCredentialsId, String projectKey, String apiEndpoint, String comment) {
   pullRequestId      = env.CHANGE_ID
   repoName           = determineRepoName()
   repositorySlug     = toSlug(repoName)
-  encodedTokenString = getBasicAuthCredentials(bitbucketCfg.httpsCredentialsId)
+  encodedTokenString = getBasicAuthCredentials(httpsCredentialsId)
 
   // Docs: https://docs.atlassian.com/bitbucket-server/rest/6.7.1/bitbucket-rest.html#idp214
-  endpoint = "${bitbucketCfg.apiEndpoint}/rest/api/1.0/projects/" +
+  endpoint = "${apiEndpoint}/rest/api/1.0/projects/" +
     "${projectKey}/repos/${repositorySlug}/pull-requests/${pullRequestId}/comments"
 
   // create payload
@@ -49,12 +48,13 @@ String determineRepoName() {
 }
 
 String getBasicAuthCredentials(String httpsCredentialsId) {
+  String basicAuthCreds = ''
   withCredentials([
     usernamePassword(
       credentialsId: httpsCredentialsId, passwordVariable: 'BB_PASS', usernameVariable: 'BB_USR'
     )
   ]) {
-    return "$BB_USR:$BB_PASS".bytes.encodeBase64().toString()
+    basicAuthCreds = "$BB_USR:$BB_PASS".bytes.encodeBase64().toString()
   }
-  return ''
+  return basicAuthCreds
 }
